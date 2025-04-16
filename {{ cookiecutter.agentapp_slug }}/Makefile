@@ -1,10 +1,5 @@
 # Define base path with a default
-BASE_PATH = {{cookiecutter.agentapp_slug}}
-
-# Define derived paths
-TYPES_DIR := agentapps/tools/local/$(BASE_PATH)/types
-OUTPUT_DIR := agentapps/tools/local/$(BASE_PATH)/$(BASE_PATH)-server/models
-TEMP_DIR := .temp_schemas
+TOOL_NAME = {{ cookiecutter.agentapp_slug }}
 
 # Create necessary directories
 $(shell mkdir -p $(OUTPUT_DIR) $(TEMP_DIR))
@@ -70,17 +65,13 @@ clean-pytest: ## remove pytest artifacts
 	rm -fr .pytest_cache
 	rm -f .coverage
 
-.PHONY: new-tool
-new-tool:
-ifndef TOOL_NAME
-	@echo "Error: TOOL_NAME is required"
-	@echo "Usage: make new-tool TOOL_NAME=your_tool_name"
-	@exit 1
-endif
+.PHONY: python-tool
+python-tool:
 	@echo "Creating new tool: $(TOOL_NAME)"
 	uv init $(TOOL_NAME)-server && \
 	cd $(TOOL_NAME)-server && \
 	uv venv && \
 	source .venv/bin/activate && \
-	uv add "mcp[cli]" &&
+	uv add "mcp[cli]" && \
+	mv hello.py main.py
 	@echo "Tool $(TOOL_NAME) created successfully in agentapps/tools/local/$(TOOL_NAME)"
