@@ -1,0 +1,5 @@
+{
+    "agentapp_name": "Simplaix Agentapp Template",
+    "agentapp_slug": "{{ cookiecutter.agentapp_name.lower().replace(' ', '_') }}",
+    "author": "Simplaix"
+  }

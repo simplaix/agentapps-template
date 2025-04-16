@@ -1,0 +1,6 @@
+{
+  "{{cookiecutter.agentapp_slug}}": {
+    "client_tools": ["tool_1", "tool_2", "tool_3"],
+    "server_tools": ["tool_4", "tool_5", "tool_6"]
+  }
+}
